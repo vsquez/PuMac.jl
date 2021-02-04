@@ -1,27 +1,28 @@
-using CSV
-using DataFrames
-using JLD
+using CSV, DataFrames, JLD, FileIO
 
-function concatenador(archivos::Array{String,undef}, columnas::Array{String,undef}, nombre_archivo::String, exportto::String = "csv", faltantes::Bool = true)
+function unir(archivos::Array{String,undef}, columnas::Array{String,undef}, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
 
     # Asegurando que los valores introducidos sean los esperados
     if(size(archivos,1) < 1)
         error("Pon archivos csv para extraer, debe de ser un arreglo de tipo String")
     end
-    
+    #=
     for i in archivos
         if(contains(i, ".csv"))
-        error("Algun archivo no es csv o esta mal escrito, asegurarse que sea de la forma [\"Archivo_1.csv\", \"Archivo_2.csv\", ...]")
+            error("Algun archivo no es csv o esta mal escrito, asegurarse que sea de la forma [\"Archivo_1.csv\", \"Archivo_2.csv\", ...]")
+        elseif(contains(i, ".jld"))
+            error("Algun archivo no es jld o esta mal escrito, asegurarse que sea de la forma [\"Archivo_1.jld\", \"Archivo_2.jld\", ...]")
+        end
     end
-    
+    =#
     if(size(columnas,1) < 1)
         error("Pon las columnas que quieres extraer, debe de ser un arreglo de tipo String")
     end
-    
-    if(lowercase(exportto) != "csv" || lowercase(exportto) != "jld" || lowercase(exportto) != "no" )
-        error("No se puede exportar al tipo de archivo $exportto, las opciones son: no, csv o jld")
+       #=
+    if(!contains(nombre_archivo, ".jld"))
+        error("El String que contiene al archivo necesita tener el tipo de archivo especificado o tipo de archivo no soportado")
     end
-    
+    =#
     # Se declara un arreglo con la misma cantidad de espacio que la cantidad de archivos pasados por el usuario  
     arreglo = Array{DataFrame}(undef,size(archivos,1))
     tamanio = 0
@@ -65,20 +66,25 @@ function concatenador(archivos::Array{String,undef}, columnas::Array{String,unde
     select!(df_nuevo, Not("ПУМАК"))
 
     # Se exporta al tipo de archivo deseado
-    if(lowercase(exportto) == "csv")
+    if(contains(nombre_archivo, ".csv"))
         CSV.write(nombre_archivo , df_nuevo)
-#######println("el archivo se guardo en", joinpath(pwd(), nombre_ruta))
-    else  if(lowercase(exportto) == "jld")
-        #exportar a jld
+        print("el archivo se guardo en: ")
+        println( joinpath( pwd(), nombre_archivo))
+        
+    elseif(contains(nombre_archivo, ".jld"))
+        save(joinpath(pwd(), nombre_archivo), "df", nombre_archivo)
+        print("el archivo se guardo en: ")
+        println(joinpath(pwd(), nombre_archivo))
+        
     end
       
     return df_nuevo
 end
 
-function concatenador(carpeta::String, columnas::Array{String,undef}, nombre_archivo::String, exportto::String = "csv", faltantes::Bool = true)
+function unir(carpeta::String, columnas::Array{String,1}, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
     # Se extraen los archivos de tipo csv de la carpeta
     cd(carpeta)
     archivos = filter(x->endswith(x, ".csv"), readdir())
     
-    concatenador(archivos, columnas, nombre_archivo, exportto, faltantes)
+    unir(archivos, columnas, nombre_archivo, faltantes)
 end
