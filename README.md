@@ -23,8 +23,10 @@ _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener 
 
 _Dí cómo será ese paso_
 
-```
-Da un ejemplo
+```julia
+# Pkg.add("PuMac")
+using PuMac
+
 ```
 
 _Y repite_
