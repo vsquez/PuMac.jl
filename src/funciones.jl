@@ -1,6 +1,6 @@
 using CSV, DataFrames, JLD, FileIO
 
-function unir(archivos::ArrayArray{String,1}, columnas::Array, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
+function unir(archivos::Array, columnas::Array, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
 
     # Asegurando que los valores introducidos sean los esperados
     if(size(archivos,1) < 1)
