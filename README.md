@@ -28,8 +28,9 @@ Pkg.add("PuMac")
 using PuMac
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
+```julia
+unir(archivos::Array{String,undef}, columnas::Array{String,undef}, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
+```
 ## Licencia 
 
 Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE.md](LICENSE.md) para detalle
