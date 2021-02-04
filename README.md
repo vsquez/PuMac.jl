@@ -4,7 +4,7 @@
 
 ### Pre-requisitos 
 
-CSV, DataFrames, JLD, FileIO
+`CSV`, `DataFrames`, `JLD, FileIO`
 
 ### Instalación 
 
