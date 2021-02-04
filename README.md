@@ -55,9 +55,15 @@ Y el segundo archivo contiene este otro DataFrame
    5 │ 8        V
    6 │ 13       U
 ```
+
+Entonces usamos la función
 ```julia
-unir(["Archivo_1.csv", "Archivo_2.csv"], ["A", "C"], nombre_archivo = "NuevoCSV.csv", faltantes = true)
+archivos = ["Archivo_1.csv", "Archivo_2.csv"]
+columnas_deseadas = ["A", "C"]
+nombre_del_archivo = "NuevoCSV.csv"
+Nuevo_DF = unir(archivos, columnas_deseadas, nombre_del_archivo)
 ```
+El resultado sera un archivo de nombre NuevoCSV.csv que contiene la siguiente información
 ```julia
 6×3 DataFrame
  Row │ A        C   
