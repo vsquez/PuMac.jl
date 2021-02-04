@@ -1,4 +1,4 @@
-module PuMAC
+module PuMac
 
     include("funciones.jl")
 
