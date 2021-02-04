@@ -72,7 +72,7 @@ function unir(archivos::ArrayArray{String,1}, columnas::ArrayArray{String,1}, no
         println( joinpath( pwd(), nombre_archivo))
         
     elseif(contains(nombre_archivo, ".jld"))
-        save(joinpath(pwd(), nombre_archivo), "df", df_nuevo)
+        save(nombre_archivo, "df", df_nuevo)
         print("el archivo se guardo en: ")
         println(joinpath(pwd(), nombre_archivo))
         
