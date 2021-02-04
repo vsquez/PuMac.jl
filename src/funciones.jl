@@ -1,6 +1,6 @@
 using CSV, DataFrames, JLD, FileIO
 
-function unir(archivos::ArrayArray{String,1}, columnas::ArrayArray{String,1}, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
+function unir(archivos::ArrayArray{String,1}, columnas::Array, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
 
     # Asegurando que los valores introducidos sean los esperados
     if(size(archivos,1) < 1)
@@ -81,7 +81,7 @@ function unir(archivos::ArrayArray{String,1}, columnas::ArrayArray{String,1}, no
     return df_nuevo
 end
 
-function unir(carpeta::String, columnas::Array{String,1}, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
+function unir(carpeta::String, columnas::Array, nombre_archivo::String = "new_PuMAC.csv", faltantes::Bool = true)
     # Se extraen los archivos de tipo csv de la carpeta
     cd(carpeta)
     archivos = filter(x->endswith(x, ".csv"), readdir())
