@@ -1,6 +1,6 @@
 module PuMAC
 
-    import("funciones.jl")
+    include("funciones.jl")
 
     export unir
 
